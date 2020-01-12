@@ -1,0 +1,13 @@
+{% extends "debt/base.html" %}
+{% block content %}
+    <h1>They owe me:</h1>
+    {% for debt in ascreditor  %}
+        <h2>{{ debt.title }}</h2>
+        <h4>Debtor {{ debt.debtor }}</h4>
+    {% endfor %}
+    <h1>I owe them:</h1>
+    {% for debt in asdebtor  %}
+        <h2>{{ debt.title }}</h2>
+        <h3>Creditor {{ debt.creditor }}</h3>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,7 @@
+{% extends "debt/base.html" %}
+{% block content %} 
+    <h1>Debt details:</h1>
+        <h2>{{ object.title }}</h2>
+        <h3>Creditor {{ object.creditor }}</h3>
+        <h3>Debtor {{ object.debtor }}</h3> 
+{% endblock content %}
