@@ -1,9 +1,49 @@
-.container {
-    text-align: center;
-    align-items: center;
+body {
+    height: 100%;
+    display: grid;
 }
 
-.logo {
-    width: 50%;
-    height: 50%;
+.bg {
+    background-image: url('test.jpg');
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+@media only screen and (max-width: 700px){
+    .bg{
+        
+    }
+
+    .card {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+
+/* change to start button or sth */
+.btnn {
+    background-color: black;
+    color: white;
+    border-width: 2px;
+    border-color: white;
+    min-width: 300px;
+    min-height: 35px;
+    position: relative;
+    z-index: 0;
+}
+
+.card {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    opacity: 0.88;
 }
