@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.views.generic import DetailView, DeleteView
+from .mixins import UserIsModeratorMixin
 
 
 # Create your views here.
@@ -45,10 +49,30 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
-class UsersListView(LoginRequiredMixin, UserPassesTestMixin ,ListView):
+@login_required
+def pw_change(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, f'Your password was changed successfully!')
+            logout(request)
+            return redirect('login')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/password_change.html', { 'form': form})
+
+
+class UsersListView(LoginRequiredMixin, UserIsModeratorMixin, ListView):
     model = User
     ordering = ['username']
     context_object_name = 'users'
 
-    def test_func(self):
-        return self.request.user.profile.is_moderator
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+
+
+class UserDeleteView(LoginRequiredMixin, UserIsModeratorMixin, DeleteView):
+    model = User
+    success_url = '/admin'
