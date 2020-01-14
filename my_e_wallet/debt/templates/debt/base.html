@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{% static 'wallet.svg' %}"/>
 
     <script src="https://kit.fontawesome.com/3fc9b1edbd.js" crossorigin="anonymous"></script>
 
@@ -18,24 +19,19 @@
   <body class="bg">
     <!-- NAVBAR IMBA -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      
+      <a class="navbar-brand" href="{% url 'debt-home' %}">My e-Wallet</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     
-      <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="navbar-brand" href="{% url 'debt-home' %}">My e-Wallet</a>
-          </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'debts' %}">Debts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Planer</a>
+            <a class="nav-link" href="{% url 'debt-create' %}">New</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -46,7 +42,7 @@
             <a class="nav-link" href="{% url 'debt-about' %}">About</a>
           </li>
         </ul>
-
+        
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
           <li class="nav-item">
@@ -66,9 +62,9 @@
         </ul>
       </div>
     </nav>
-
+    
     <!-- CONTENT -->
-    <div class="container card">
+    <div class="container">
       {% if messages %}
         {% for message in messages %}
           <div class="allert alert-{{ message.tags }}">

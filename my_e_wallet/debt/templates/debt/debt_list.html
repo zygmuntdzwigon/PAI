@@ -1,13 +1,22 @@
 {% extends "debt/base.html" %}
 {% block content %}
-    <h1>They owe me:</h1>
-    {% for debt in ascreditor  %}
-        <h2>{{ debt.title }}</h2>
-        <h4>Debtor {{ debt.debtor }}</h4>
-    {% endfor %}
-    <h1>I owe them:</h1>
-    {% for debt in asdebtor  %}
-        <h2>{{ debt.title }}</h2>
-        <h3>Creditor {{ debt.creditor }}</h3>
-    {% endfor %}
+<div class="card card-bg">
+
+    {% if ascreditor %}
+        <h1>They owe me:</h1>
+        {% for debt in ascreditor  %}
+            <h2><a href="{% url 'user-detail' debt.debtor.id %}">{{ debt.debtor }}</a> {{ debt.amount }} for 
+            <a href="{% url 'debt-detail' debt.id %}">{{ debt.title }}</a></h2>
+        {% endfor %}
+    {% endif %}
+
+    {% if ascreditor %}
+        <h1>I owe them:</h1>
+        {% for debt in asdebtor  %}
+        <h2><a href="{% url 'user-detail' debt.creditor.id %}">{{ debt.creditor }}</a> {{ debt.amount }} for 
+            <a href="{% url 'debt-detail' debt.id %}">{{ debt.title }}</a></h2>
+        {% endfor %}
+    {% endif %}
+    
+</div>
 {% endblock content %}

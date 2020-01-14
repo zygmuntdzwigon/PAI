@@ -12,13 +12,12 @@ body {
     background-position: center;
 }
 @media only screen and (max-width: 700px){
-    .bg{
-        
-    }
 
-    .card {
+    .card-bg {
         padding-top: 1%;
         padding-bottom: 1%;
+        padding-right: 1%;
+        padding-left: 1%;
     }
 }
 
@@ -26,7 +25,6 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
-    /* bring your own prefixes */
     transform: translate(-50%, -50%);
   }
 
@@ -42,8 +40,14 @@ body {
     z-index: 0;
 }
 
-.card {
+.btn {
+    opacity: 1;
+}
+
+.card-bg {
     padding-top: 3%;
     padding-bottom: 3%;
-    opacity: 0.88;
+    padding-right: 3%;
+    padding-left: 3%;
+    opacity: 0.8;
 }

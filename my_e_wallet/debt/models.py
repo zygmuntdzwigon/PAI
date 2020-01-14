@@ -25,7 +25,7 @@ class Debt(models.Model):
     status = models.ForeignKey(DebtStatuses, on_delete=models.DO_NOTHING, default=1)
     creditor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myDebts")
     debtor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="debtors", null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author", null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
 
     def __str__(self):
         return self.title

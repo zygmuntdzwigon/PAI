@@ -40,6 +40,23 @@ class DebtCreateView(LoginRequiredMixin, CreateView):
     model = Debt
     form_class = DebtForm
 
+    def form_valid(self, form):
+        form.instance.status = DebtStatuses.objects.filter(status='Pending').first()
+        debtor = form.instance.debtor
+        creditor = form.instance.creditor
+        author = self.request.user
+        form.instance.author = author
+        errors = []
+        if debtor == creditor:
+            errors.append("Creditor and debtor cannot be the same users")
+        
+        if author != debtor and author != creditor:
+            errors.append("You must be eighter creditor or debtor")
+        if errors:
+            raise ValidationError(errors)
+        
+        return super().form_valid(form) 
+
 
 class DebtDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
     model = Debt
