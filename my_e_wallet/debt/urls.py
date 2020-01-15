@@ -16,4 +16,5 @@ urlpatterns = [
     path('debts/<int:pk>/update/', DebtUpdateView.as_view(), name='debt-update'),
     path('debts/<int:pk>/delete/', DebtDeleteView.as_view(), name='debt-delete'),
     path('debts/new/', DebtCreateView.as_view(), name='debt-create'),
+    path('debts/<int:pk>/paid', views.markaspaid, name='debt-paid')
 ]

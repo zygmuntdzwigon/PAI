@@ -1,5 +1,36 @@
 {% extends "debt/base.html" %}
 {% block content %}
+
+<script type="text/javascript">
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+    var csrftoken = getCookie('csrftoken');
+    console.log(csrftoken)
+    function fun(){
+        $.ajax({
+        headers: { "X-CSRFToken": csrftoken },
+        url: '/debts/{{ object.id }}/paid',
+        method : 'POST',
+        success: function(response) {
+            alert('Debt marked as paid')
+            document.location.reload()
+        }
+        }); 
+    }
+</script>
 <div class="card card-bg">
     <div class="media border p-3">
         <div class="media-body">
@@ -11,7 +42,7 @@
             <p>Debt status: {{ object.status }}</p>
             <p>Debt category: {{ object.category }}</p>
             <a type="button" class="btn btn-danger" href="{% url 'debt-delete' object.id %}">Delete debt</a>
-            <button type="button" class="btn btn-success">Mark as paid</button>
+            <button type="button" class="btn btn-success" onclick="fun()">Mark as paid</button>
         </div> 
     </div>
 </div>

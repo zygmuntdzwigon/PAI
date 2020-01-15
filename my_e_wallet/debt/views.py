@@ -11,7 +11,7 @@ from django.views.generic import (
     )
 from .mixins import UserIsAuthorMixin, UserIsDebtorOrCreditorMixin
 from .forms import DebtForm
-
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -19,6 +19,13 @@ def home(request):
 
 def about(request):
     return render(request, 'debt/about.html')
+
+def markaspaid(request, pk):
+    debt = Debt.objects.filter(id=pk).first()
+    debt.status = DebtStatuses.objects.filter(id=3).first()
+    debt.save()
+    return HttpResponse(f"Debt {debt.title} marked as paid")
+
 
 
 class DebtListView(LoginRequiredMixin, ListView):
