@@ -1,22 +1,70 @@
 {% extends "debt/base.html" %}
 {% block content %}
 <div class="card card-bg">
-
     {% if ascreditor %}
-        <h1>They owe me:</h1>
+    <h1>They owe me:</h1>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Debtor</th>
+            <th>Title</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          
         {% for debt in ascreditor  %}
-            <h2><a href="{% url 'user-detail' debt.debtor.id %}">{{ debt.debtor }}</a> {{ debt.amount }} for 
-            <a href="{% url 'debt-detail' debt.id %}">{{ debt.title }}</a></h2>
+        <tr>
+            <td>{{ debt.debtor }}</td>
+            <td>{{ debt.title }}</td>
+            <td>{{ debt.amount }}</td>
+            <td>{{ debt.date }}</td>
+            <td><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Actions
+              </button>
+              <div class="dropdown-menu">
+                <a type="button" class="dropdown-item" href="{% url 'debt-delete' debt.id %}">Delete debt</a>
+                <a class="dropdown-item" href="#">Mark as paid</a>
+              </div></td>
+          </tr>
         {% endfor %}
+        </tbody>
+      </table>
     {% endif %}
 
-    {% if ascreditor %}
-        <h1>I owe them:</h1>
+    {% if asdebtor %}
+    <h1>I owe them:</h1>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Creditor</th>
+            <th>Title</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          
         {% for debt in asdebtor  %}
-        <h2><a href="{% url 'user-detail' debt.creditor.id %}">{{ debt.creditor }}</a> {{ debt.amount }} for 
-            <a href="{% url 'debt-detail' debt.id %}">{{ debt.title }}</a></h2>
+        <tr>
+            <td>{{ debt.creditor }}</td>
+            <td>{{ debt.title }}</td>
+            <td>{{ debt.amount }}</td>
+            <td>{{ debt.date }}</td>
+            <td><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Actions
+              </button>
+              <div class="dropdown-menu">
+                <a type="button" class="dropdown-item" href="{% url 'debt-delete' debt.id %}">Delete debt</a>
+                <a class="dropdown-item" href="#">Mark as paid</a>
+              </div></td>
+          </tr>
         {% endfor %}
+        </tbody>
+      </table>
     {% endif %}
-    
 </div>
 {% endblock content %}

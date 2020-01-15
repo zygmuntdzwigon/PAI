@@ -1,4 +1,11 @@
 {% extends "debt/base.html" %}
 {% block content %}
-    <h1>Cy@</h1>
+<div class="card card-bg">
+    <h1>See you soon!</h1>
+    <div class="border-top pt-3">
+        <small class="test-muted">Want to come back?
+        <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
+    </div>
+</div>
 {% endblock content %}

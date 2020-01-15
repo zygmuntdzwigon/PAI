@@ -49,6 +49,8 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+
+
 @login_required
 def pw_change(request):
     if request.method == 'POST':
