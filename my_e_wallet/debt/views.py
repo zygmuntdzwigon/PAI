@@ -26,7 +26,8 @@ def markaspaid(request, pk):
     debt.save()
     return HttpResponse()
 
-
+def not_found(request, exception):
+    return render(request, 'debt/404.html')
 
 class DebtListView(LoginRequiredMixin, ListView):
     model = Debt

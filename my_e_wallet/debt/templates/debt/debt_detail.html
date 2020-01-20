@@ -42,7 +42,9 @@ function getCookie(name) {
             {% if user == debt.author %}
                 <a type="button" class="btn btn-danger" href="{% url 'debt-delete' object.id %}">Delete debt</a>
             {% endif %}
-            <button type="button" class="btn btn-success" onclick="fun()">Mark as paid</button>
+            {% if debt.status.status == 'Pending' %}
+                <button type="button" class="btn btn-success" onclick="fun()">Mark as paid</button>
+            {% endif %}
         </div> 
     </div>
 </div>

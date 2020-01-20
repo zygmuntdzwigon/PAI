@@ -18,3 +18,6 @@ urlpatterns = [
     path('debts/new/', DebtCreateView.as_view(), name='debt-create'),
     path('debts/<int:pk>/paid', views.markaspaid, name='debt-paid')
 ]
+
+
+handler404 = 'debt.views.not_found'

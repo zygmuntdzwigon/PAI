@@ -1,0 +1,12 @@
+{% extends "debt/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card card-bg">
+    <div class="media-body">
+    <h1>Permission denied</h1>
+    <p>You have no permission to view this page.</p> 
+    <button type="button" class="btn btn-info" onclick="window.history.back()">Get me back!</button>
+</div>
+</div>
+{% endblock content %}

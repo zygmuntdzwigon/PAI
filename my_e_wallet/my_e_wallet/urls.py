@@ -35,3 +35,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler403 = 'users.views.permission_denied'
+handler404 = 'users.views.invalid'

@@ -49,7 +49,11 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+def permission_denied(request, exception):
+    return render(request, 'users/403.html')
 
+def invalid(request, exception):
+    return render(request, 'users/404.html')
 
 @login_required
 def pw_change(request):
