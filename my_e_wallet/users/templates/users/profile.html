@@ -18,9 +18,11 @@
           {{ p_form|crispy }}
       </fieldset>
       <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>            
-      </div>
-  </form>
+          <button class="btn btn-outline-info" type="submit">Update</button>
+          <a class="btn btn-outline-warning" href="{% url 'password-change' %}">Change password</a>
+      </div> 
+    </form>
   </div>
+    
   </div>
 {% endblock content %}

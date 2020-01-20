@@ -8,7 +8,6 @@ function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
@@ -18,7 +17,6 @@ function getCookie(name) {
     return cookieValue;
 }
     var csrftoken = getCookie('csrftoken');
-    console.log(csrftoken)
     function fun(){
         $.ajax({
         headers: { "X-CSRFToken": csrftoken },
@@ -41,7 +39,9 @@ function getCookie(name) {
             <p>Debt value: {{ object.amount }}$</p>
             <p>Debt status: {{ object.status }}</p>
             <p>Debt category: {{ object.category }}</p>
-            <a type="button" class="btn btn-danger" href="{% url 'debt-delete' object.id %}">Delete debt</a>
+            {% if user == debt.author %}
+                <a type="button" class="btn btn-danger" href="{% url 'debt-delete' object.id %}">Delete debt</a>
+            {% endif %}
             <button type="button" class="btn btn-success" onclick="fun()">Mark as paid</button>
         </div> 
     </div>

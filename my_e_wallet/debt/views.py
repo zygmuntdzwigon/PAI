@@ -22,9 +22,9 @@ def about(request):
 
 def markaspaid(request, pk):
     debt = Debt.objects.filter(id=pk).first()
-    debt.status = DebtStatuses.objects.filter(id=3).first()
+    debt.status = DebtStatuses.objects.filter(status="Paid").first()
     debt.save()
-    return HttpResponse(f"Debt {debt.title} marked as paid")
+    return HttpResponse()
 
 
 
